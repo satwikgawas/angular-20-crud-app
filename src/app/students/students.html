@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">विद्यार्थी व्यवस्थापन (CRUD App)</h3>
+    </div>
+    <div class="card-body">
+      <!-- Form -->
+      <form
+        (ngSubmit)="isEdit ? updateStudent() : addStudent()"
+        class="row g-3 mb-4"
+      >
+        <div class="col-md-5">
+          <input
+            type="text"
+            [(ngModel)]="student.name"
+            name="name"
+            class="form-control"
+            placeholder="नाव"
+            required
+          />
+        </div>
+        <div class="col-md-5">
+          <input
+            type="email"
+            [(ngModel)]="student.email"
+            name="email"
+            class="form-control"
+            placeholder="ईमेल"
+            required
+          />
+        </div>
+        <div class="col-md-2 d-grid">
+          <button
+            type="submit"
+            class="btn"
+            [ngClass]="isEdit ? 'btn-warning' : 'btn-success'"
+          >
+            {{ isEdit ? "अपडेट करा" : "जोडा" }}
+          </button>
+        </div>
+      </form>
+
+      <!-- Student Table -->
+      <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>नाव</th>
+            <th>ईमेल</th>
+            <th>क्रिया</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of students; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+            <td>
+              <button class="btn btn-sm btn-info me-2" (click)="editStudent(s)">
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="deleteStudent(s.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="students.length === 0">
+            <td colspan="4" class="text-muted">
+              कोणताही विद्यार्थी उपलब्ध नाही.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
