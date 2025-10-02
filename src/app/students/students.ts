@@ -44,7 +44,8 @@ export class StudentsComponent {
   }
 
   deleteStudent(id: number) {
-    this.students.filter((s) => s.id !== id);
+    debugger;
+    this.students = this.students.filter((s) => s.id !== id);
     this.studentService.saveStudents(this.students);
   }
 }
